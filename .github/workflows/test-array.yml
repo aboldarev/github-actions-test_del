@@ -9,29 +9,28 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.matrix.outputs.value }}
+      enviroments: ${{ steps.enviroments.outputs.value }}
     steps:
       - name: Debug action
         uses: hmarr/debug-action@v3.0.0
-      - id: m1
+      - id: enviroments
         run: |
-          eList='dev';
-          eList+="prod"
-          if ${{ contains(github.event.head_commit.message, '/deploy int') }} then
-            eList+="int"
-          fi
-          echo "value=[$(eList[@])]" >> $GITHUB_OUTPU
-      - id: matrix
-        run: |
-          echo "value=[\"a\", \"b\", \"c\"]" >> $GITHUB_OUTPUT
+          env_list='"dev"'
+          for e in "int" "testing"
+          do
+            if [[ ${{ contains(github.event.head_commit.message, "/deploy $e") }} ]]; then
+              env_list+=",\"$e\""
+            fi
+          done
+          echo "value=[$env_list]" >> $GITHUB_OUTPU
       - run: |
-          echo "${{ steps.matrix.outputs.value }}"
+          echo "${{ steps.enviroments.outputs.value }}"
   build:
     needs: [ setup ]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{fromJSON(needs.setup.outputs.matrix)}}
+        value: ${{fromJSON(needs.setup.outputs.enviroments)}}
     steps:
       - run: |
           echo "${{ matrix.value }}"
