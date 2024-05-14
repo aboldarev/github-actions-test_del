@@ -1,4 +1,4 @@
-name: Test Github Actions Dynamic Matrix
+name: Test Github Actions Dynamic Matrix 
 on:
   workflow_dispatch:
     inputs:
