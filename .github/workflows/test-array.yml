@@ -1,6 +1,9 @@
 name: Test Github Actions Dynamic Matrix
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
   
 jobs:
   setup:
@@ -10,6 +13,14 @@ jobs:
     steps:
       - name: Debug action
         uses: hmarr/debug-action@v3.0.0
+      - id: m1
+        run: |
+          eList='dev';
+          eList+="prod"
+          if ${{ contains(github.event.head_commit.message, '/deploy int') }} 
+            eList+="int"
+          fi
+          echo "value=[$(eList[@])]" >> $GITHUB_OUTPU
       - id: matrix
         run: |
           echo "value=[\"a\", \"b\", \"c\"]" >> $GITHUB_OUTPUT
