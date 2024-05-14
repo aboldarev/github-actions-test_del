@@ -1,6 +1,15 @@
 name: Test Github Actions Dynamic Matrix
 on:
   workflow_dispatch:
+    inputs:
+      eniroment:
+        description: 'Enviroment (dev,int,testing)'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - int
+          - testing
   push:
     branches:
       - main
@@ -18,7 +27,7 @@ jobs:
           env_list='"dev"'
           for e in "int" "testing"
           do
-            if [[ $MESSAGE = *"/deploy $e"* ]]; then
+            if [[ $MESSAGE == *"/deploy $e"* || ${{ inputs.tags }} == $e ]] ; then
               env_list+=",\"$e\""
             fi
           done
