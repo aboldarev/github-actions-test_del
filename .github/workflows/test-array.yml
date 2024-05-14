@@ -27,7 +27,7 @@ jobs:
           env_list='"dev"'
           for e in "int" "testing"
           do
-            if [[ $MESSAGE == *"/deploy $e"* || ${{ inputs.tags }} == $e ]] ; then
+            if [[ "$MESSAGE" == *"/deploy $e"* || "${{ inputs.tags }}" == "$e" ]] ; then
               env_list+=",\"$e\""
             fi
           done
