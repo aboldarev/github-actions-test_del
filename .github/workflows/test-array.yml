@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{fromJSON(needs.setup.outputs.enviroments)}}
+        enviroment: ${{fromJSON(needs.setup.outputs.enviroments)}}
     steps:
       - run: |
-          echo "${{ matrix.value }}"
+          echo "${{ matrix.enviroment }}"
