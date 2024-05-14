@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       eniroment:
-        description: 'Enviroment (dev,int,testing)'
+        description: 'Enviroment to be deployed'
         required: true
         default: 'dev'
         type: choice
@@ -27,7 +27,7 @@ jobs:
           env_list='"dev"'
           for e in "int" "testing"
           do
-            if [[ "$MESSAGE" == *"/deploy $e"* || "${{ inputs.tags }}" == "$e" ]] ; then
+            if [[ "$MESSAGE" == *"/deploy $e"* || "${{ inputs.eniroment }}" == "$e" ]] ; then
               env_list+=",\"$e\""
             fi
           done
