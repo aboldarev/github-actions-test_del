@@ -22,7 +22,7 @@ jobs:
               env_list+=",\"$e\""
             fi
           done
-          echo "value=[$env_list]" >> $GITHUB_OUTPU
+          echo "value=[$env_list]" >> $GITHUB_OUTPUT
         env:
           MESSAGE: ${{github.event.head_commit.message}}
       - run: |
