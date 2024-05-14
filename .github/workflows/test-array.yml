@@ -8,6 +8,8 @@ jobs:
     outputs:
       matrix: ${{ steps.matrix.outputs.value }}
     steps:
+      - name: Debug action
+        uses: hmarr/debug-action@v3.0.0
       - id: matrix
         run: |
           echo "value=[\"a\", \"b\", \"c\"]" >> $GITHUB_OUTPUT
