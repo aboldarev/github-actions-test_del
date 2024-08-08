@@ -15,6 +15,7 @@ on:
       - main
   
 jobs:
+  enviroment: dev 
   setup:
     runs-on: ubuntu-latest
     outputs:
