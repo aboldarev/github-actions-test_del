@@ -30,7 +30,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run Backend tests
-        working-directory: ./backend
         run: echo "Running Backend tests"
 
   frontend-unit-tests:
