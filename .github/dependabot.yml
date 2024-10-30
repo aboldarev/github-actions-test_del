@@ -1,0 +1,48 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    groups: 
+      dev-dependencies:
+        patterns:
+          - "*" 
+  - package-ecosystem: "docker"
+    directory: "/backend"
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "amazoncorretto"
+        update-types: [ "version-update:semver-major" ]
+    groups: 
+      dev-dependencies:
+        patterns:
+          - "*" 
+  - package-ecosystem: "docker"
+    directory: "/frontend"
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "node"
+        update-types: [ "version-update:semver-major" ]
+    groups: 
+      dev-dependencies:
+        patterns:
+          - "*"
+  - package-ecosystem: "gradle"
+    directory: "/backend"
+    schedule:
+      interval: "daily"
+    groups: 
+      dev-dependencies:
+        patterns:
+          - "*"
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "daily"
+    groups: 
+      dev-dependencies:
+        patterns:
+          - "*"
