@@ -1,0 +1,43 @@
+name: Pull Request Tests
+
+on:
+  pull_request:
+    types: [ opened, edited, reopened, synchronize ]
+  workflow_dispatch:
+    inputs:
+      skip-sonar:
+        description: 'Skip Sonar check'
+        required: true
+        type: choice
+        options:
+          - "true"
+          - "false"
+        default:
+          "false"
+
+#    paths:
+#      - 'backend/**'
+#      - 'frontend/**'
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+  
+jobs:
+  backend-unit-tests:
+    runs-on: ubuntu-latest
+    name: Build Backend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Backend tests
+        working-directory: ./backend
+        run: echo "Running Backend tests"
+
+  frontend-unit-tests:
+    runs-on: ubuntu-latest
+    name: Build Frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run Frontend tests
+        run: echo "Running Frontend tests"
