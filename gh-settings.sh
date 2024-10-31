@@ -1,3 +1,2 @@
-gh variable set APP_ID -b MY-RELEASE-PLEASE
-
-gh secret set PRIVATE_KEY -b 0a27c02582e4934c166fcbdfbda510e851539f1a
+gh variable set APP_ID -b 1041234
+gh secret set PRIVATE_KEY -b "$(cat private-key.pem)"
