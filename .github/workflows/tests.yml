@@ -4,9 +4,6 @@ on:
   merge_group:
   pull_request:
     types: [ opened, edited, reopened, synchronize ]
-    paths:
-      - '**'
-      - '!*.md'
 
   workflow_dispatch:
     inputs:
@@ -19,8 +16,6 @@ on:
           - "false"
         default:
           "false"
-
-
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
