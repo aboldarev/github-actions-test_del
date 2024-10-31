@@ -27,4 +27,4 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           # this is a built-in strategy in release-please, see "Action Inputs"
           # for more options
-          release-type: java
+          release-type: simple
